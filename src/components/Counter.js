@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { login } from '../store/authSlice';
+import { login, logout } from '../store/authSlice';
 import { increase, decrease } from '../store/counterSilce';
 
 
@@ -17,6 +17,9 @@ function Counter() {
         }
     },[dispatch]);
 
+    
+    
+
     useEffect(() => {
         counterHandler("increase",5)
     }, [counterHandler]);
@@ -24,6 +27,15 @@ function Counter() {
 
     const isLoggedIn = ()=>{
         return globalState.auth.isLogged;
+    }
+
+    const loginHandler = (status)=>{
+        if(status){
+            dispatch(logout());
+        }
+        else{
+            dispatch(login());
+        }
     }
 
     return (
@@ -42,7 +54,7 @@ function Counter() {
             }
 
             <div>
-                <button onClick={() => dispatch(login())}>{isLoggedIn() ? "logout" : "login"}</button>
+                <button onClick={() => loginHandler(isLoggedIn())}>{isLoggedIn() ? "logout" : "login"}</button>
             </div>
         </div>
     );

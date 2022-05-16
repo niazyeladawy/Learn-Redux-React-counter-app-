@@ -7,11 +7,14 @@ const authSilce = createSlice({
     initialState:initState,
     reducers:{
         login:(state  )=>{
-            state.isLogged = !state.isLogged;
+            state.isLogged = true;
+        },
+        logout:(state  )=>{
+            state.isLogged = false;
         },
     }
 });
 
 
 export default authSilce.reducer;
-export const {login} = authSilce.actions;
+export const {login,logout} = authSilce.actions;
